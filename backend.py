@@ -1,5 +1,5 @@
 #from flaskext.mysql import MySQL
-from flask import Flask
+from flask import Flask, request
 app = Flask(__name__)
 
 #mysql = MySQL()
@@ -20,7 +20,7 @@ def index():
     this is a root dir of my server
     :return: str
     """
-    return "This is root!!!!"
+    return "SMARTPARK!!!!!"
 
 # GET
 @app.route('/spots/<spot>', methods = ['GET'])
@@ -33,9 +33,7 @@ def spot_taken(spot):
     return the taken value
     """
 
-    to_string = request.data.decode("utf-8")
-    print(to_string + "Our data")
-    return to_string
+    return spot
 
     #for now we only have 1 table alumnimemorial, in the future when we have more garages it will not be hardcoded into sqlquery 
 #    cursor.execute('select taken from alumnimemorial where ID = ' +spot)
