@@ -1,5 +1,5 @@
 #from flaskext.mysql import MySQL
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
@@ -26,15 +26,18 @@ def index():
 # GET
 @app.route('/spots/<spot>', methods = ['GET'])
 def spot_taken(spot):
-#   cursor = conn.cursor()
     """
     :param spot number:
     :return: 0 if not taken, 1 if taken
     connect to mysql, query the spot,
     return the taken value
     """
-
-    return spot
+    try:
+        spot_info=Spot.query.filter_by(spot_id=spot).first()
+        return jsonify(spot_info.serialize())
+    except Exception as e:
+        return(str(e))
+    
 
     #for now we only have 1 table alumnimemorial, in the future when we have more garages it will not be hardcoded into sqlquery 
 #    cursor.execute('select taken from alumnimemorial where ID = ' +spot)
