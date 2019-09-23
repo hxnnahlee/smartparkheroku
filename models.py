@@ -16,7 +16,6 @@ class Spot(db.Model):
 
     def serialize(self):
         return {
-            'id': self.id,
             'spot id': self.spot_id,
             'taken': self.taken
         }
