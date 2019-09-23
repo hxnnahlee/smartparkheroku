@@ -23,7 +23,7 @@ def index():
     return "This is root!!!!"
 
 # GET
-@app.route('/spots/<spot>')
+@app.route('/spots/<spot>', methods = ['GET'])
 def spot_taken(spot):
 #   cursor = conn.cursor()
     """
@@ -33,12 +33,18 @@ def spot_taken(spot):
     return the taken value
     """
 
+    to_string = request.data.decode("utf-8")
+    print(to_string + "Our data")
+    return to_string
+
     #for now we only have 1 table alumnimemorial, in the future when we have more garages it will not be hardcoded into sqlquery 
 #    cursor.execute('select taken from alumnimemorial where ID = ' +spot)
 #    conn.commit()
 #    val = cursor.fetchone()
 #    cursor.close()
-    return str(val[0])
+
+
+
 
 #if __name__ == "__main__":
 #    app.run()
