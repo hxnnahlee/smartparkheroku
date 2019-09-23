@@ -45,6 +45,7 @@ def spot_taken(spot):
 @app.route('/spots', methods = ['POST'])
 def post_spot():
 
+    #We can use this to parse, update database
     to_string = request.data.decode("utf-8")
     print(to_string + "Post data")
 
