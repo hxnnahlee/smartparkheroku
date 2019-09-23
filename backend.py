@@ -2,15 +2,16 @@
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+import os
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://mfcxbbqeapznpi:af5713c3d90c89bf039f143c68e31d8ed47509cfbeff36157b27fa00cf4539c3@ec2-54-221-244-70.compute-1.amazonaws.com:5432/df0snl0k3sb9mq'
 
+app.config.from_object(os.environ['APP_SETTINGS'])
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
+from models import Spot
 migrate = Migrate(app, db)
 
-class Spot(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    taken = db.Column(db.Integer)
 
     
 # root
