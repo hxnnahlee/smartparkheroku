@@ -53,6 +53,24 @@ def post_spot():
     to_string = request.data.decode("utf-8")
     print(to_string + "Post data")
 
+    #Request in this format: spot_id, taken
+    tokens = to_string.split(" ")
+    spot_id = tokens[0]
+    taken = tokens[1]
+
+    try:
+        spot=Spot(
+            spot_id=spot_id,
+            taken=taken
+        )
+        db.session.add(spot)
+        db.session.commit()
+        return "Spot updated. book id={}".format(book.id)
+    except Exception as e:
+        return(str(e))
+
+
+
     return to_string
 
 #if __name__ == "__main__":
