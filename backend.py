@@ -42,7 +42,13 @@ def spot_taken(spot):
 #    cursor.close()
 
 
+@app.route('/spots', methods = ['POST'])
+def post_spot():
 
+    to_string = request.data.decode("utf-8")
+    print(to_string + "Post data")
+
+    return to_string
 
 #if __name__ == "__main__":
 #    app.run()
