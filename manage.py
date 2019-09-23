@@ -4,8 +4,7 @@ import os
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 
-from backend import app, db, models
-from models import Spot
+from backend import app, db
 
 
 app.config.from_object(os.environ['APP_SETTINGS'])
