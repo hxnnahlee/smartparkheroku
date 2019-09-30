@@ -34,7 +34,6 @@ def spot_taken(spot):
     """
     try:
         spot_info=Spot.query.filter_by(spot_id=spot).first()
-        
         return jsonify(spot_info.serialize())
         #return "spot: " + spot + " will add taken from DB"
     except Exception as e:
@@ -55,7 +54,7 @@ def post_spot():
     to_string = request.data.decode("utf-8")
     print(to_string + "Post data")
 
-    #Request in this format: spot_id, taken
+    #Request in this format: spot_id taken
     tokens = to_string.split(" ")
     spot_id = tokens[0]
     taken = tokens[1]
@@ -65,9 +64,9 @@ def post_spot():
             spot_id=spot_id,
             taken=taken
         )
-        #db.session.add(spot)
-        #db.session.commit()
-        #return "Spot updated. spot id={}".format(spot.id)
+        db.session.add(spot)
+        db.session.commit()
+        return "Spot updated. spot id={}".format(spot.id)
         return jsonify(spot.serialize())
     except Exception as e:
         return(str(e))
