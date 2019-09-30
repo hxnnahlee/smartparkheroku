@@ -33,9 +33,9 @@ def spot_taken(spot):
     return the taken value
     """
     try:
-        #spot_info=Spot.query.filter_by(spot_id=spot).first()
-        #return jsonify(spot_info.serialize())
-        return "spot: " + spot + " will add taken from DB"
+        spot_info=Spot.query.filter_by(spot_id=spot).first()
+        return jsonify(spot_info.serialize())
+        #return "spot: " + spot + " will add taken from DB"
     except Exception as e:
         return(str(e))
     
