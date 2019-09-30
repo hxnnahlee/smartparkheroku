@@ -64,10 +64,14 @@ def post_spot():
             spot_id=spot_id,
             taken=taken
         )
-        db.session.add(spot)
+        exists = Spot.query.filter_by(spot_id=spot_id).first()
+        if exists is not None:
+            exists.taken = taken
+        else:
+            db.session.add(spot)
         db.session.commit()
         return "Spot updated. spot id={}".format(spot.spot_id)
-        return jsonify(spot.serialize())
+        #return jsonify(spot.serialize())
     except Exception as e:
         return(str(e))
 
