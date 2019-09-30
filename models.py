@@ -1,6 +1,7 @@
 from backend import db
 from sqlalchemy.dialects.postgresql import JSON
 
+
 class Spot(db.Model):
     __tablename__ = 'spots'
 
