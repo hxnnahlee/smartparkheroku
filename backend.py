@@ -8,6 +8,7 @@ app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+cur = db.cursor()
 
 from models import Spot
 migrate = Migrate(app, db)
@@ -33,8 +34,15 @@ def spot_taken(spot):
     return the taken value
     """
     try:
-        spot_info=Spot.query.filter_by(spot_id=spot).first()
-        return jsonify(spot_info.serialize())
+        #spot_info=Spot.query.filter_by(spot_id=spot).first()
+
+        #return jsonify(spot_info.serialize())
+
+        cur.execute(""" SELECT * from "Spots" """)
+        rows = cur.fetchall()
+        for row in rows:
+            print[0]
+
         #return "spot: " + spot + " will add taken from DB"
     except Exception as e:
         return(str(e))
