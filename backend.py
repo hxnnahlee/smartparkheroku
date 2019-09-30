@@ -8,7 +8,8 @@ app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-cur = db.cursor()
+connection = db.engine.raw_connection()
+cur = connection.cursor()
 
 from models import Spot
 migrate = Migrate(app, db)
@@ -41,7 +42,7 @@ def spot_taken(spot):
         cur.execute(""" SELECT * from "Spots" """)
         rows = cur.fetchall()
         for row in rows:
-            print[0]
+            print(row[0])
 
         #return "spot: " + spot + " will add taken from DB"
     except Exception as e:
