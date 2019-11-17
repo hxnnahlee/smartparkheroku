@@ -70,7 +70,8 @@ def post_spot():
         else:
             db.session.add(spot)
         db.session.commit()
-        return "Spot updated. spot id={}".format(spot.spot_id)
+        #return "Spot updated. spot id={}".format(spot.spot_id)
+        return "Spot updated. spot id= "+spot_id+" taken= "+taken
         #return jsonify(spot.serialize())
     except Exception as e:
         return(str(e))
