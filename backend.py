@@ -3,13 +3,14 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
+import datetime
 app = Flask(__name__)
 
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-from models import Spot
+from models import Spot, TimestampChange, Average
 migrate = Migrate(app, db)
 
 
@@ -46,26 +47,62 @@ def spot_taken(spot):
 #    val = cursor.fetchone()
 #    cursor.close()
 
+# POST
+@app.route('/spotstest', methods = ['POST'])
+def test_post():
+    to_string = request.data.decode("utf-8")
+    print(to_string + " in test")
 
+    try:
+        timestamp = TimestampChange(
+            spot_detail_id = "2210",
+            spot_id = "221",
+            timestamp = "11/18/2019, 16:21:54",
+            state = "0"
+        )
+        exists = TimestampChange.query.filter_by(spot_detail_id=spot_detail_id).first()
+        if exists is not None:
+            exists.taken = spot_taken
+
+        else:
+            db.session.add(timestamp)
+        db.session.commit()
+
+        return "i think this worked"
+    except Exception as e:
+        return(str(e))
+
+    return to_string
+
+# POST
 @app.route('/spots', methods = ['POST'])
 def post_spot():
 
     #We can use this to parse, update database
     to_string = request.data.decode("utf-8")
-    print(to_string + "Post data")
+    print(to_string)
 
     #Request in this format: spot_id taken
     tokens = to_string.split(" ")
     spot_id = tokens[0]
-    taken = tokens[1]
+    taken = tokens[1] 
 
     try:
+
         spot=Spot(
             spot_id=spot_id,
             taken=taken
         )
         exists = Spot.query.filter_by(spot_id=spot_id).first()
+
         if exists is not None:
+
+            # Update timestamp table
+            #if exists.taken != taken
+
+
+
+            # Set taken to taken if spot with that ID exists
             exists.taken = taken
         else:
             db.session.add(spot)
