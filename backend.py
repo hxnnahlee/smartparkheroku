@@ -111,7 +111,6 @@ def post_spot():
                 timeExists = TimestampChange.query.filter_by(spot_detail_id=timestamp.spot_detail_id).first()
                 if timeExists is not None:
                     timestamp.timestamp = date_time
-                    timestamp.state = taken
                 else:
                     db.session.add(timestamp)
                 db.session.commit()
