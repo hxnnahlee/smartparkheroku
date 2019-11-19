@@ -57,7 +57,7 @@ def test_post():
             timestamp = "11/18/2019, 16:21:54",
             state = "0"
         )
-        exists = TimestampChange.query.filter_by(spot_detail_id=spot_detail_id).first()
+        exists = TimestampChange.query.filter_by(spot_detail_id="2210").first()
         if exists is not None:
             exists.taken = spot_taken
 
