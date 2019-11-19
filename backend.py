@@ -42,10 +42,7 @@ def spot_taken(spot):
     
 
     #for now we only have 1 table alumnimemorial, in the future when we have more garages it will not be hardcoded into sqlquery 
-#    cursor.execute('select taken from alumnimemorial where ID = ' +spot)
-#    conn.commit()
-#    val = cursor.fetchone()
-#    cursor.close()
+
 
 # POST
 @app.route('/spotstest', methods = ['POST'])
