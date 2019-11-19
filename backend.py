@@ -103,7 +103,7 @@ def post_spot():
 
                 # Spot gets taken, update the timestamp in TimestampChange
                 # and the state in both tables
-                if taken == 1:
+                if taken == "1":
                     print("Taken = 1 in change of state")
                     exists.taken = taken
                     timestamp = TimestampChange(
