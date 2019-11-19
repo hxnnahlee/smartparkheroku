@@ -77,7 +77,6 @@ def post_spot():
 
     #We can use this to parse, update database
     to_string = request.data.decode("utf-8")
-    print(to_string)
 
     #Request in this format: spot_id taken
     tokens = to_string.split(" ")
