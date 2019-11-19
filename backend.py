@@ -45,6 +45,7 @@ def spot_taken(spot):
 
 
 # POST
+# Test route used to see if the DB was working
 @app.route('/spotstest', methods = ['POST'])
 def test_post():
     to_string = request.data.decode("utf-8")
@@ -52,9 +53,9 @@ def test_post():
 
     try:
         timestamp = TimestampChange(
-            spot_detail_id = "2210",
+            spot_detail_id = "2211",
             spot_id = "221",
-            timestamp = "11/18/2019, 16:21:54",
+            timestamp = "11/19/2019, 11:31:54",
             state = "0"
         )
         exists = TimestampChange.query.filter_by(spot_detail_id="2210").first()
@@ -83,6 +84,9 @@ def post_spot():
     spot_id = tokens[0]
     taken = tokens[1] 
 
+    now = datetime.datetime.now()
+    date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
+
     try:
 
         spot=Spot(
@@ -93,8 +97,27 @@ def post_spot():
 
         if exists is not None:
 
-            # Update timestamp table
-            #if exists.taken != taken
+            # Change in state
+            if exists.taken != taken
+
+                # Spot gets taken, update the timestamp in TimestampChange
+                # and the state in both tables
+                if taken == 1
+                    exists.taken = taken
+                    timestamp = TimestampChange(
+                        spot_detail_id = spot_id+taken,
+                        spot_id = spot_id,
+                        timestamp = date_time,
+                        state = taken
+                    )
+
+                    timeExists = TimestampChange.query.filter_by(spot_detail_id=timestamp.spot_detail_id).first()
+                    if timeExists is not None:
+                        timestamp.timestamp = date_time
+                        timestamp.state = taken
+                    else:
+                        db.session.add(timestamp)
+                    db.session.commit()
 
 
 
