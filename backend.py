@@ -98,11 +98,11 @@ def post_spot():
         if exists is not None:
 
             # Change in state
-            if exists.taken != taken
+            if exists.taken != taken:
 
                 # Spot gets taken, update the timestamp in TimestampChange
                 # and the state in both tables
-                if taken == 1
+                if taken == 1:
                     exists.taken = taken
                     timestamp = TimestampChange(
                         spot_detail_id = spot_id+taken,
