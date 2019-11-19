@@ -101,26 +101,24 @@ def post_spot():
             if exists.taken != taken:
                 print("Change in state")
                 exists.taken = taken
-                    timestamp = TimestampChange(
-                        spot_detail_id = spot_id+taken,
-                        spot_id = spot_id,
-                        timestamp = date_time,
-                        state = taken
-                    )
+                timestamp = TimestampChange(
+                    spot_detail_id = spot_id+taken,
+                    spot_id = spot_id,
+                    timestamp = date_time,
+                    state = taken
+                )
 
-                    timeExists = TimestampChange.query.filter_by(spot_detail_id=timestamp.spot_detail_id).first()
-                    if timeExists is not None:
-                        timestamp.timestamp = date_time
-                        timestamp.state = taken
-                    else:
-                        db.session.add(timestamp)
-                    db.session.commit()
+                timeExists = TimestampChange.query.filter_by(spot_detail_id=timestamp.spot_detail_id).first()
+                if timeExists is not None:
+                    timestamp.timestamp = date_time
+                    timestamp.state = taken
+                else:
+                    db.session.add(timestamp)
+                db.session.commit()
 
                 # Spot gets taken, update the timestamp in TimestampChange
                 # and the state in both tables
-                if taken == "1":
-
-                if taken == "0":
+                # If statements here
  
             # Set taken to taken if spot with that ID exists
             exists.taken = taken
