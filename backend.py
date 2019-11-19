@@ -76,14 +76,14 @@ def test_post():
 @app.route('/spots', methods = ['POST'])
 def post_spot():
 
-    #We can use this to parse, update database
     to_string = request.data.decode("utf-8")
 
-    #Request in this format: spot_id taken
+    # Body of POST is in this format: spot_id taken
     tokens = to_string.split(" ")
     spot_id = tokens[0]
     taken = tokens[1] 
 
+    # Time to string, we'll store the date as a string in our DB
     now = datetime.datetime.now()
     date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
 
@@ -94,10 +94,10 @@ def post_spot():
             taken=taken
         )
         exists = Spot.query.filter_by(spot_id=spot_id).first()
-
+        # Check case if the spot with that ID already exists in the database 
         if exists is not None:
 
-            # Change in state
+            # Change in state, update timestamp
             if exists.taken != taken:
                 print("Change in state")
                 exists.taken = taken
@@ -115,18 +115,16 @@ def post_spot():
                     db.session.add(timestamp)
                 db.session.commit()
 
-                # Spot gets taken, update the timestamp in TimestampChange
-                # and the state in both tables
-                # If statements here
+                # If 1/0 statements here -- TO DO 
  
             # Set taken to taken if spot with that ID exists
             exists.taken = taken
+
+        # If spot does not already exist, create in the database
         else:
             db.session.add(spot)
         db.session.commit()
-        #return "Spot updated. spot id={}".format(spot.spot_id)
         return "Spot updated. spot id= "+spot_id+" taken= "+taken
-        #return jsonify(spot.serialize())
     except Exception as e:
         return(str(e))
 
