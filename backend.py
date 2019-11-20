@@ -35,15 +35,15 @@ def spot_taken(spot):
     """
     try:
         spot_info=Spot.query.filter_by(spot_id=spot).first()
-        json = jsonify(spot_info.serialize())
-        if json.taken == "1":
+        #json = jsonify(spot_info.serialize())
+        if spot_info.taken == "1":
             now = datetime.datetime.now()
             exists = TimestampChange.query.filter_by(spot_detail_id=json.spot_id+"1").first()
             difference = now - exists
             aver = Average.query.first()
             perc = (difference*100)/aver.avg
-            json.taken = perc
-        return json
+            spot_info.taken = perc
+        return spot_info.taken
         #return "spot: " + spot + " will add taken from DB"
     except Exception as e:
         return(str(e))
