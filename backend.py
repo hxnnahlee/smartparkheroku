@@ -51,7 +51,6 @@ def spot_taken(spot):
             aver = Average.query.first()
             perc = (difference*100)/aver.avg
             print(perc)
-            perc = perc * 100
             return str(perc)
         else:
              return "0"
