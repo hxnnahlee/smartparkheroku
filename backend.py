@@ -36,7 +36,9 @@ def spot_taken(spot):
     try:
         spot_info=Spot.query.filter_by(spot_id=spot).first()
         #json = jsonify(spot_info.serialize())
-        if spot_info.taken == "1":
+        print(spot_info.taken)
+        if spot_info.taken == "1" or spot_info.taken == 1:
+            print("in taken")
             now = datetime.datetime.now()
             exists = TimestampChange.query.filter_by(spot_detail_id=spot+"1").first()
             difference = now - exists
