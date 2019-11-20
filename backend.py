@@ -43,7 +43,7 @@ def spot_taken(spot):
             aver = Average.query.first()
             perc = (difference*100)/aver.avg
             spot_info.taken = perc
-        return spot_info.taken
+        return str(spot_info.taken)
         #return "spot: " + spot + " will add taken from DB"
     except Exception as e:
         return(str(e))
