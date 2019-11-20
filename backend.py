@@ -121,6 +121,7 @@ def post_spot():
                     time = TimestampChange.query.filter_by(spot_detail_id=timestamp.spot_id+"1").first()
                     as_date = datetime.datetime.strptime(time.timestamp, '%m/%d/%Y, %H:%M:%S')
                     difference = now - as_date 
+                    difference = difference.days * 24 * 60
                     print("difference: ")
                     print(difference)
                     aver = Average.query.first()
