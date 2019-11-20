@@ -54,7 +54,7 @@ class Average(db.Model):
     timestamp = db.Column(db.String)
     spot_id = db.Column(db.Integer)
 
-    def __init__(self, avg, timestamp, spot_id, time_parked):
+    def __init__(self, timestamp, spot_id, time_parked):
         self.time_parked = time_parked
         self.timestamp = timestamp
         self.spot_id = spot_id
