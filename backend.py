@@ -42,7 +42,8 @@ def spot_taken(spot):
             difference = now - exists
             aver = Average.query.first()
             perc = (difference*100)/aver.avg
-        return str(perc)
+            return str(perc)
+        else return "0"
         #return "spot: " + spot + " will add taken from DB"
     except Exception as e:
         return(str(e))
