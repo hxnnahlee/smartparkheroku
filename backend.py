@@ -41,8 +41,9 @@ def spot_taken(spot):
             print("in taken")
             now = datetime.datetime.now()
             exists = TimestampChange.query.filter_by(spot_detail_id=spot+"1").first()
-            difference = now - exists
             difference = difference.days * 24 * 60
+            difference = now - exists
+
             print(difference)
             aver = Average.query.first()
             perc = (difference)/aver.avg
