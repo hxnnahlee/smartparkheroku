@@ -119,7 +119,6 @@ def post_spot():
                 if taken == "0":
                     print("update average")
                     time = TimestampChange.query.filter_by(spot_detail_id=timestamp.spot_id+"1").first()
-                    print(time)
                     as_date = datetime.datetime.strptime(time, '%m/%d/%Y, %H:%M:%S')
                     difference = now - as_date 
                     print("difference: ")
