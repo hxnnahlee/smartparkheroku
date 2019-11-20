@@ -41,8 +41,10 @@ def spot_taken(spot):
             exists = TimestampChange.query.filter_by(spot_detail_id=spot+"1").first()
             difference = now - exists
             difference = difference.days * 24 * 60
+            print(difference)
             aver = Average.query.first()
             perc = (difference)/aver.avg
+            print(perc)
             perc = perc * 100
             return str(perc)
         else:
@@ -146,7 +148,8 @@ def post_spot():
                     hist = Average(
                         avg = difference
                     )
-                    db.session.add(avg)
+                    db.session.add(hist)
+                    db.session.commit()
                     
 
             # Set taken to taken if spot with that ID exists
