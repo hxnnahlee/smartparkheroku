@@ -45,11 +45,18 @@ def spot_taken(spot):
 
             difference = now - as_date
             difference = difference.seconds / 60
-
+            print("differencE:")
 
             print(difference)
-            aver = Average.query.first()
-            perc = (difference*100)/aver.avg
+            aver = Average.query.limit(15).all()
+            sum = 0
+            count = 0
+            for i in aver
+                sum = sum + i.avg
+                count = count + 1
+            avg = sum/count
+            print(avg)
+            perc = (difference*100)/avg
             print(perc)
             return str(perc)
         else:
@@ -153,6 +160,8 @@ def post_spot():
                     #aver.avg = new_avg
                     hist = Average(
                         avg = difference
+                        timestamp = date_time
+                        spot_id=spot_id
                     )
                     db.session.add(hist)
                     db.session.commit()
