@@ -116,12 +116,18 @@ def post_spot():
                 db.session.commit()
 
                 # If 1/0 statements here -- TO DO
-                if taken == "0"
+                if taken == "0":
+                    print("update average")
                     time = TimestampChange.query.filter_by(spot_detail_id=timestamp.spot_id+"1").first()
+                    print(time)
                     as_date = datetime.datetime.strptime(time, '%m/%d/%Y, %H:%M:%S')
                     difference = now - as_date 
+                    print("difference: ")
+                    print(difference)
                     aver = Average.query.first()
                     new_avg = (10*aver.avg + difference)/11
+                    print("new avg")
+                    print(new_avg)
                     aver.avg = new_avg
                     
 
