@@ -50,12 +50,12 @@ class TimestampChange(db.Model):
 class Average(db.Model):
     __tablename__ = 'average'
     id = db.Column(db.Integer, primary_key=True)
-    avg = db.Column(db.Float)
+    time_parked = db.Column(db.Float)
     timestamp = db.Column(db.String)
     spot_id = db.Column(db.Integer)
 
-    def __init__(self, avg, timestamp, spot_id):
-        self.avg = avg
+    def __init__(self, avg, timestamp, spot_id, time_parked):
+        self.time_parked = time_parked
         self.timestamp = timestamp
         self.spot_id = spot_id
 
@@ -64,7 +64,7 @@ class Average(db.Model):
     
     def serialize(self):
         return {
-            'average': self.avg,
+            'time parked': self.time_parked,
             'spot id': self.spot_id,
             'timestamp': self.timestamp
         }

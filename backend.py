@@ -52,7 +52,7 @@ def spot_taken(spot):
             sum = 0
             count = 0
             for i in aver:
-                sum = sum + i.avg
+                sum = sum + i.time_parked
                 count = count + 1
             avg = sum/count
             print(avg)
@@ -159,7 +159,7 @@ def post_spot():
                     #print(new_avg)
                     #aver.avg = new_avg
                     hist = Average(
-                        avg = difference,
+                        time_parked = difference,
                         timestamp = date_time,
                         spot_id=spot_id
                     )
