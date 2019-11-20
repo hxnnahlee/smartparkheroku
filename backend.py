@@ -159,8 +159,8 @@ def post_spot():
                     #print(new_avg)
                     #aver.avg = new_avg
                     hist = Average(
-                        avg = difference
-                        timestamp = date_time
+                        avg = difference,
+                        timestamp = date_time,
                         spot_id=spot_id
                     )
                     db.session.add(hist)
