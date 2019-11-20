@@ -51,7 +51,7 @@ def spot_taken(spot):
             aver = Average.query.limit(15).all()
             sum = 0
             count = 0
-            for i in aver
+            for i in aver:
                 sum = sum + i.avg
                 count = count + 1
             avg = sum/count
