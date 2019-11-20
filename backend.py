@@ -115,8 +115,16 @@ def post_spot():
                     db.session.add(timestamp)
                 db.session.commit()
 
-                # If 1/0 statements here -- TO DO 
- 
+                # If 1/0 statements here -- TO DO
+                if taken == "0"
+                    time = TimestampChange.query.filter_by(spot_detail_id=timestamp.spot_id+"1").first()
+                    as_date = datetime.datetime.strptime(time, '%m/%d/%Y, %H:%M:%S')
+                    difference = now - as_date 
+                    aver = Average.query.first()
+                    new_avg = (10*aver.avg + difference)/11
+                    aver.avg = new_avg
+                    
+
             # Set taken to taken if spot with that ID exists
             exists.taken = taken
 
