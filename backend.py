@@ -132,6 +132,8 @@ def post_spot():
         if exists is not None:
  
             taken = int(taken)
+            exists.taken = taken
+
             # Change in state, update timestamp
             if exists.taken != taken:
                 taken = str(taken)
