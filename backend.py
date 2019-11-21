@@ -130,7 +130,7 @@ def post_spot():
             print(type(taken))
 
             # Change in state, update timestamp
-            if str(exists.taken) != str(taken):
+            if str(exists.taken) != taken:
                 print("Change in state")
                 exists.taken = taken
                 timestamp = TimestampChange(
