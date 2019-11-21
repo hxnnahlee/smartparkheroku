@@ -113,7 +113,10 @@ def post_spot():
     date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
 
     try:
-
+        print("spot id")
+        print(spot_id)
+        print("taken")
+        print(taken)
         spot=Spot(
             spot_id=spot_id,
             taken=taken
@@ -121,20 +124,11 @@ def post_spot():
         exists = Spot.query.filter_by(spot_id=spot_id).first()
         # Check case if the spot with that ID already exists in the database 
         if exists is not None:
-            print("exists:")
-            print(exists.taken)
-
-            print("taken:")
-            print(taken)
-            print(type(exists.taken))
-            print(type(taken))
+ 
             taken = int(taken)
-            print("what")
             # Change in state, update timestamp
             if exists.taken != taken:
-                print("?")
                 taken = str(taken)
-                print("??")
                 print("Change in state")
                 exists.taken = taken
                 timestamp = TimestampChange(
@@ -143,14 +137,12 @@ def post_spot():
                     timestamp = date_time,
                     state = taken
                 )
-                print(date_time)
+
                 timeExists = TimestampChange.query.filter_by(spot_detail_id=timestamp.spot_detail_id).first()
             
                 if timeExists is not None:
-                    print("time stamp is not none")
                     timeExists.timestamp = date_time
                 else:
-                    print("time stamp is none")
                     db.session.add(timestamp)
                 db.session.commit()
 
@@ -160,15 +152,8 @@ def post_spot():
                     time = TimestampChange.query.filter_by(spot_detail_id=timestamp.spot_id+"1").first()
                     as_date = datetime.datetime.strptime(time.timestamp, '%m/%d/%Y, %H:%M:%S')
                     difference = now - as_date 
-                    print(difference)
                     difference = difference.seconds / 60
-                    print("difference: ")
-                    print(difference)
-                    #aver = Average.query.first()
-                    #new_avg = (10*aver.avg + difference)/11
-                    #print("new avg")
-                    #print(new_avg)
-                    #aver.avg = new_avg
+   
                     hist = Average(
                         time_parked = difference,
                         timestamp = date_time,
