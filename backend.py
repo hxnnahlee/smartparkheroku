@@ -179,6 +179,8 @@ def post_spot():
                     
 
             # Set taken to taken if spot with that ID exists
+            taken = str(taken)
+
             exists.taken = taken
 
         # If spot does not already exist, create in the database
