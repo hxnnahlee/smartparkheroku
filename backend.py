@@ -121,9 +121,13 @@ def post_spot():
         exists = Spot.query.filter_by(spot_id=spot_id).first()
         # Check case if the spot with that ID already exists in the database 
         if exists is not None:
+            print("exists:")
+            print(exists.taken)
 
+            print("taken:")
+            print(taken)
             # Change in state, update timestamp
-            if exists.taken != taken:
+            if str(exists.taken) != str(taken):
                 print("Change in state")
                 exists.taken = taken
                 timestamp = TimestampChange(
