@@ -107,6 +107,10 @@ def post_spot():
     tokens = to_string.split(" ")
     spot_id = tokens[0]
     taken = tokens[1] 
+    median = tokens[2]
+    if median is not None:
+        print("median: ")
+        print(median)
 
     # Time to string, we'll store the date as a string in our DB
     now = datetime.datetime.now()
