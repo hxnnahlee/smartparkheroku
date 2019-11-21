@@ -129,6 +129,7 @@ def post_spot():
             print(type(exists.taken))
             print(type(taken))
             taken = int(taken)
+            print("what")
             # Change in state, update timestamp
             if exists.taken != taken:
                 taken = str(taken)
