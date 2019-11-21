@@ -132,7 +132,9 @@ def post_spot():
             print("what")
             # Change in state, update timestamp
             if exists.taken != taken:
+                print("?")
                 taken = str(taken)
+                print("??")
                 print("Change in state")
                 exists.taken = taken
                 timestamp = TimestampChange(
