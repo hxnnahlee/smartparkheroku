@@ -24,6 +24,8 @@ def index():
     """
     return "SMARTPARK!!!!!"
 
+
+
 # GET
 @app.route('/spots/<spot>', methods = ['GET'])
 def spot_taken(spot):
@@ -175,6 +177,7 @@ def post_spot():
             taken = str(taken)
 
             exists.taken = taken
+            db.session.commit()
 
         # If spot does not already exist, create in the database
         else:
